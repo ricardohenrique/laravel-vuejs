@@ -62,11 +62,25 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .content a{
+                border: 1px solid #b2b6b8;
+                padding: 20px 55px;
+                text-decoration: none;
+                font-size: 20px;
+                margin: 5px;
+                border-radius: 5px;
+            }
+
+            .content a:hover{
+                background-color: #b2b6b8;
+                transition: all 0.2s;
+            }
         </style>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
+<!--             @if (Route::has('login'))
                 <div class="top-right links">
                     @if (Auth::check())
                         <a href="{{ url('/home') }}">Home</a>
@@ -75,20 +89,14 @@
                         <a href="{{ url('/register') }}">Register</a>
                     @endif
                 </div>
-            @endif
+            @endif -->
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Intranet
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                <a href="{{ url('/login') }}">Login</a>
+                <a href="{{ url('/register') }}">Register</a>
             </div>
         </div>
     </body>
