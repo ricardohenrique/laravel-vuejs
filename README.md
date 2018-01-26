@@ -15,3 +15,5 @@ test FTD
 `$ cd /home/ec2-user/environment`
 
 `$ sudo php artisan serve --host=0.0.0.0 --port=80`
+
+Access url: http://18.219.24.99/
