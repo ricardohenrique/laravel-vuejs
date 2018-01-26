@@ -12,7 +12,8 @@
 
                 <div class="panel-body">
                     @if (session('status'))
-                        <div class="alert alert-success">
+                        <div class="alert alert-success" role="alert">
+                        	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             {{ session('status') }}
                         </div>
                     @endif
@@ -30,14 +31,16 @@
 							</tr> 
 						</thead> 
 						<tbody> 
-							<tr>
-								<th>1</th> 
-								<td>Ricardo</td> 
-								<td>Mota</td> 
-								<td>01/02/1995</td> 
-								<td>02/03/1888</td> 
-								<td>M</td> 
-							</tr> 
+							@foreach($employees as $emploey)
+								<tr>
+									<th>{{$emploey->id}}</th> 
+									<td>{{$emploey->first_name}}</td> 
+									<td>{{$emploey->last_name}}</td> 
+									<td>{{$emploey->hire_date}}</td> 
+									<td>{{$emploey->birth_date}}</td> 
+									<td>{{$emploey->gender}}</td> 
+								</tr> 
+							@endforeach
 						</tbody> 
 					</table>
                 </div>

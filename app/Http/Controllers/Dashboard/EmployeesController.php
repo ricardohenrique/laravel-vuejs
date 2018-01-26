@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreEmployeesRequest;
 use App\Http\Controllers\Controller;
+use App\Employees;
 
 class EmployeesController extends Controller
 {
@@ -25,7 +26,10 @@ class EmployeesController extends Controller
      */
     public function index()
     {
-        return view('employees/index');
+        $employees = Employees::all();
+        $data['employees'] = Employees::all();
+        
+        return view('employees/index', $data);
     }
 
     /**
@@ -35,6 +39,7 @@ class EmployeesController extends Controller
      */
     public function create()
     {
+
         return view('employees/create');
     }
 
@@ -45,7 +50,15 @@ class EmployeesController extends Controller
      */
     public function store(StoreEmployeesRequest $request)
     {
-        dd($request->all());
-        return view('employees/create');
+        $employe = new Employees;
+        $employe->first_name = $request->first_name;
+        $employe->last_name = $request->last_name;
+        $employe->gender = $request->gender;
+        $employe->hire_date = $request->hire_date;
+        $employe->birth_date = $request->birth_date;
+        $employe->save();
+
+        $messageReturn = "Funcionario '".$employe->first_name."' salvo com sucesso";
+        return redirect('dashboard/employees')->with('status', $messageReturn);;
     }
 }

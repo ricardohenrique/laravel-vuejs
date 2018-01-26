@@ -21,6 +21,7 @@ class CreateTableDeptEmp extends Migration
             $table->date('to_date');
             $table->foreign('emp_id')->references('id')->on('employees');
             $table->foreign('dept_id')->references('id')->on('departments');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

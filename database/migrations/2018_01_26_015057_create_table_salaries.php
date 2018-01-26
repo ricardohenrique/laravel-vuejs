@@ -20,6 +20,7 @@ class CreateTableSalaries extends Migration
             $table->date('from_date');
             $table->date('to_date');
             $table->foreign('emp_id')->references('id')->on('employees');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -20,6 +20,7 @@ class CreateTableEmployees extends Migration
             $table->string('last_name', 20);
             $table->enum('gender', ['M', 'F']);
             $table->date('hire_date');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
