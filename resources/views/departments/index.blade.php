@@ -6,8 +6,8 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                	Dashboard > Funcionarios
-                	<a class="btn btn-info pull-right" href="{{ url('dashboard/employees/create') }}">Novo</a>
+                	Dashboard > Departamentos
+                	<a class="btn btn-info pull-right" href="{{ url('dashboard/departments/create') }}">Novo</a>
                 </div>
 
                 <div class="panel-body">
@@ -19,33 +19,25 @@
                     @endif
 
 					<table class="table"> 
-						<caption>Lista de funcionários</caption> 
+						<caption>Lista de departamentos</caption> 
 						<thead> 
 							<tr> 
 								<th>#</th> 
-								<th>Primeiro nome</th> 
-								<th>Último nome</th>
-								<th>Data de contratação</th> 
-								<th>Data de nascimento</th> 
-								<th>Sexo</th>
+								<th>Nome</th> 
 								<th>Ações</th>
 							</tr> 
 						</thead> 
 						<tbody> 
-							@foreach($employees as $employe)
+							@foreach($departments as $department)
 								<tr>
-									<th>{{$employe->id}}</th> 
-									<td>{{$employe->first_name}}</td> 
-									<td>{{$employe->last_name}}</td> 
-									<td>{{$employe->hire_date}}</td> 
-									<td>{{$employe->birth_date}}</td> 
-									<td>{{$employe->gender}}</td> 
+									<th>{{$department->id}}</th> 
+									<td>{{$department->name}}</td> 
 									<td>
-										<a class="btn btn-info btn-xs pull-left" href='{{url("dashboard/employees/$employe->id/edit")}}'>Editar</a>
-										<form class="form-horizontal" method="POST" action='{{ url("dashboard/employees/$employe->id") }}' >
+										<a class="btn btn-info btn-xs pull-left" href='{{url("dashboard/departments/$department->id/edit")}}'>Editar</a>
+										<form class="form-horizontal" method="POST" action='{{ url("dashboard/departments/$department->id") }}' >
 				                        	{{ csrf_field() }}
 				                        	<input type="hidden" name="_method" value="DELETE">
-				                        	<button class="btn btn-danger btn-xs pull-left" href='{{url("dashboard/employees/$employe->id/edit")}}'>Excluir</button>
+				                        	<button class="btn btn-danger btn-xs pull-left" href='{{url("dashboard/departments/$department->id/edit")}}'>Excluir</button>
 				                        </form>
 									</td>
 								</tr> 

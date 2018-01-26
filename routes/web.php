@@ -21,5 +21,3 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('dashboard/employees', 'Dashboard\EmployeesController');
 Route::resource('dashboard/departments', 'Dashboard\DepartmentsController');
-Route::resource('dashboard/salaries', 'Dashboard\SalariesController');
-Route::resource('dashboard/titles', 'Dashboard\TitlesController');

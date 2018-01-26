@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Dashboard;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreEmployeesRequest;
+use App\Http\Requests\EmployeesRequest;
 use App\Http\Controllers\Controller;
 use App\Employees;
+use App\Departments;
+use App\DepartmentsEmployees;
+use App\Titles;
+use App\Salaries;
 
 class EmployeesController extends Controller
 {
@@ -26,7 +30,6 @@ class EmployeesController extends Controller
      */
     public function index()
     {
-        $employees = Employees::all();
         $data['employees'] = Employees::all();
 
         return view('employees/index', $data);
@@ -39,7 +42,8 @@ class EmployeesController extends Controller
      */
     public function create()
     {
-        return view('employees/create');
+        $data['departments'] = Departments::all();
+        return view('employees/create', $data);
     }
 
     /**
@@ -47,7 +51,7 @@ class EmployeesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreEmployeesRequest $request)
+    public function store(EmployeesRequest $request)
     {
         $employe = new Employees;
         $employe->first_name = $request->first_name;
@@ -56,6 +60,21 @@ class EmployeesController extends Controller
         $employe->hire_date = $request->hire_date;
         $employe->birth_date = $request->birth_date;
         $employe->save();
+
+        $title = new Titles;
+        $title->title = $request->title;
+        $title->emp_id = $employe->id;
+        $title->save();
+
+        $salarie = new Salaries;
+        $salarie->salary = $request->salary;
+        $salarie->emp_id = $employe->id;
+        $salarie->save();
+
+        $departmentsEmployees = new DepartmentsEmployees;
+        $departmentsEmployees->emp_id = $employe->id;
+        $departmentsEmployees->dept_id = $request->department;
+        $departmentsEmployees->save();
 
         $messageReturn = "Funcionario '".$employe->first_name."' salvo com sucesso";
         return redirect('dashboard/employees')->with('status', $messageReturn);;
@@ -68,8 +87,8 @@ class EmployeesController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        $employe = Employees::find($id);
-        $data['employe'] = $employe;
+        $data['employe'] = Employees::find($id);
+        $data['departments'] = Departments::all();
 
         return view('employees/edit', $data);
     }
@@ -79,7 +98,7 @@ class EmployeesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreEmployeesRequest $request, $id)
+    public function update(EmployeesRequest $request, $id)
     {
         $employe = Employees::find($id);
         $employe->first_name = $request->first_name;
@@ -88,6 +107,8 @@ class EmployeesController extends Controller
         $employe->hire_date = $request->hire_date;
         $employe->birth_date = $request->birth_date;
         $employe->save();
+
+
 
         $messageReturn = "Funcionario '".$employe->first_name."' alterado com sucesso";
         return redirect('dashboard/employees')->with('status', $messageReturn);;

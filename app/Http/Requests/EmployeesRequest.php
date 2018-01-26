@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreEmployeesRequest extends FormRequest
+class EmployeesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,6 +29,9 @@ class StoreEmployeesRequest extends FormRequest
             'birth_date' => 'required|date',
             'hire_date'  => 'required|date',
             'gender'     => 'required|max:1',
+            'department' => 'required',
+            'title'      => 'required|max:70|min:2',
+            'salary'    => 'required|integer',
         ];
     }
 
@@ -43,13 +46,25 @@ class StoreEmployeesRequest extends FormRequest
             'first_name.required' => 'Primeiro nome é obrigatório',
             'first_name.max'      => 'Tamanho máximo excedido(20)',
             'first_name.min'      => 'Tamanho mínimo de 3 caracteres',
+
             'last_name.required'  => 'Primeiro nome é obrigatório',
             'last_name.max'       => 'Tamanho máximo excedido(20)',
             'last_name.min'       => 'Tamanho mínimo de 3 caracteres',
+
             'birth_date.required' => 'Data de nascimento é obrigatório',
             'birth_date.date'     => 'Data de nascimento deve ser uma data válida',
+
             'hire_date.required'  => 'Data de contratação é obrigatório',
             'hire_date.date'      => 'Data de contratação deve ser uma data válida',
+
+            'department.required' => 'Departamento nome é obrigatório',
+
+            'title.required'  => 'Título é obrigatório',
+            'title.max'       => 'Tamanho máximo excedido(20)',
+            'title.min'       => 'Tamanho mínimo de 3 caracteres',
+
+            'salary.required' => 'Salário é obrigatório',
+            'salary.integer' => 'Salário deve ser número',
         ];
     }
 }
