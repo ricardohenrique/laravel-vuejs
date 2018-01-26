@@ -91,11 +91,14 @@
                             <label for="department" class="col-md-4 control-label">Departamento</label>
 
                             <div class="col-md-6">
-                                <select id="department" name="department" class="form-control" required>
-                                    @foreach($departments as $department)
-                                        <option value="{{$department->id}}">{{$department->name}}</option>
-                                    @endforeach
-                                </select>
+
+                                @foreach($departments as $department)
+                                <div class="checkbox">
+                                    <label>
+                                        <input id="department" name="department[]" type="checkbox" value="{{$department->id}}"> {{$department->name}}
+                                    </label>
+                                </div>
+                                @endforeach
 
                                 @if ($errors->has('department'))
                                     <span class="help-block">

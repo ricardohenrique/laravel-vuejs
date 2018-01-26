@@ -28,6 +28,8 @@
 								<th>Data de contratação</th> 
 								<th>Data de nascimento</th> 
 								<th>Sexo</th>
+								<th>Salário</th>
+								<th>Título</th>
 								<th>Ações</th>
 							</tr> 
 						</thead> 
@@ -40,6 +42,8 @@
 									<td>{{$employe->hire_date}}</td> 
 									<td>{{$employe->birth_date}}</td> 
 									<td>{{$employe->gender}}</td> 
+									<td>{{$employe->salary->salary}}</td> 
+									<td>{{$employe->title->title}}</td> 
 									<td>
 										<a class="btn btn-info btn-xs pull-left" href='{{url("dashboard/employees/$employe->id/edit")}}'>Editar</a>
 										<form class="form-horizontal" method="POST" action='{{ url("dashboard/employees/$employe->id") }}' >

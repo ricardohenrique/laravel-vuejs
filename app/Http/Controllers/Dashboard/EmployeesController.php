@@ -30,6 +30,8 @@ class EmployeesController extends Controller
      */
     public function index()
     {
+        $employees = Employees::with('salary', 'title', 'departments')->get();
+        // dd($employees->toArray());
         $data['employees'] = Employees::all();
 
         return view('employees/index', $data);
@@ -43,6 +45,10 @@ class EmployeesController extends Controller
     public function create()
     {
         $data['departments'] = Departments::all();
+        if(count($data['departments']) <= 0){
+            $messageReturn = "Cadastre pelo menos um departamento antes de cadastrar funcionarios";
+            return redirect('dashboard/departments')->with('status', $messageReturn);
+        }
         return view('employees/create', $data);
     }
 
@@ -71,13 +77,15 @@ class EmployeesController extends Controller
         $salarie->emp_id = $employe->id;
         $salarie->save();
 
-        $departmentsEmployees = new DepartmentsEmployees;
-        $departmentsEmployees->emp_id = $employe->id;
-        $departmentsEmployees->dept_id = $request->department;
-        $departmentsEmployees->save();
+        foreach ($request->department as $key => $value) {
+            $departmentsEmployees = new DepartmentsEmployees;
+            $departmentsEmployees->emp_id = $employe->id;
+            $departmentsEmployees->dept_id = $value;
+            $departmentsEmployees->save();
+        }
 
         $messageReturn = "Funcionario '".$employe->first_name."' salvo com sucesso";
-        return redirect('dashboard/employees')->with('status', $messageReturn);;
+        return redirect('dashboard/employees')->with('status', $messageReturn);
     }
 
     /**
@@ -87,7 +95,8 @@ class EmployeesController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        $data['employe'] = Employees::find($id);
+        $data['employe'] = Employees::with('salary', 'title', 'departments')->where('id', $id)->first();
+        // dd($data['employe']->toArray());
         $data['departments'] = Departments::all();
 
         return view('employees/edit', $data);
@@ -108,7 +117,24 @@ class EmployeesController extends Controller
         $employe->birth_date = $request->birth_date;
         $employe->save();
 
+        $title = Titles::where('emp_id', $employe->id)->first();
+        $title->title = $request->title;
+        $title->emp_id = $employe->id;
+        $title->save();
 
+        $salarie = Salaries::where('emp_id', $employe->id)->first();
+        $salarie->salary = $request->salary;
+        $salarie->emp_id = $employe->id;
+        $salarie->save();
+
+        $departmentsEmployeesDelete = DepartmentsEmployees::where('emp_id', $employe->id)->forcedelete();
+
+        foreach ($request->department as $key => $value) {
+            $departmentsEmployees = new DepartmentsEmployees;
+            $departmentsEmployees->emp_id = $employe->id;
+            $departmentsEmployees->dept_id = $value;
+            $departmentsEmployees->save();
+        }
 
         $messageReturn = "Funcionario '".$employe->first_name."' alterado com sucesso";
         return redirect('dashboard/employees')->with('status', $messageReturn);;

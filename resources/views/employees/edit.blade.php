@@ -97,11 +97,23 @@
                             <label for="department" class="col-md-4 control-label">Departamento</label>
 
                             <div class="col-md-6">
-                                <select id="department" name="department" class="form-control" required>
-                                    @foreach($departments as $department)
-                                        <option value="{{$department->id}}">{{$department->name}}</option>
-                                    @endforeach
-                                </select>
+                                @foreach($departments as $department)
+                                    <?php 
+                                        $checked = "";
+                                        foreach ($employe->departments as $key => $value) {
+                                            if($department->id == $value->id){
+                                                $checked = "checked";
+                                                break;
+                                            }
+                                        }
+                                    ?>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input {{$checked}} id="department" name="department[]" type="checkbox" value="{{$department->id}}"> {{$department->name}}
+                                        </label>
+                                    </div>
+
+                                @endforeach
 
                                 @if ($errors->has('department'))
                                     <span class="help-block">
@@ -115,7 +127,7 @@
                             <label for="salary" class="col-md-4 control-label">Salário</label>
 
                             <div class="col-md-6">
-                                <input id="salary" type="number" class="form-control" name="salary" value="{{ $employe->salary }}" required>
+                                <input id="salary" type="number" class="form-control" name="salary" value="{{ $employe->salary->salary }}" required>
 
                                 @if ($errors->has('salary'))
                                     <span class="help-block">
@@ -129,7 +141,7 @@
                             <label for="title" class="col-md-4 control-label">Título</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control" name="title" value="{{ $employe->title }}" required>
+                                <input id="title" type="text" class="form-control" name="title" value="{{ $employe->title->title }}" required>
 
                                 @if ($errors->has('title'))
                                     <span class="help-block">

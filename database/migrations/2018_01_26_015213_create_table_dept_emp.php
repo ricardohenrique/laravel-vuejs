@@ -17,8 +17,8 @@ class CreateTableDeptEmp extends Migration
             $table->increments('id');
             $table->integer('emp_id')->unsigned();
             $table->integer('dept_id')->unsigned();
-            $table->date('from_date');
-            $table->date('to_date');
+            $table->date('from_date')->nullable();
+            $table->date('to_date')->nullable();
             $table->foreign('emp_id')->references('id')->on('employees');
             $table->foreign('dept_id')->references('id')->on('departments');
             $table->softDeletes();

@@ -31,7 +31,7 @@ class EmployeesRequest extends FormRequest
             'gender'     => 'required|max:1',
             'department' => 'required',
             'title'      => 'required|max:70|min:2',
-            'salary'    => 'required|integer',
+            'salary'     => 'required|integer',
         ];
     }
 
@@ -57,7 +57,7 @@ class EmployeesRequest extends FormRequest
             'hire_date.required'  => 'Data de contratação é obrigatório',
             'hire_date.date'      => 'Data de contratação deve ser uma data válida',
 
-            'department.required' => 'Departamento nome é obrigatório',
+            'department.required' => 'Departamento é obrigatório',
 
             'title.required'  => 'Título é obrigatório',
             'title.max'       => 'Tamanho máximo excedido(20)',
