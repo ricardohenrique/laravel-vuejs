@@ -13,7 +13,16 @@ class CreateTableDeptEmp extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('dept_manager', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('emp_id')->unsigned();
+            $table->integer('dept_id')->unsigned();
+            $table->date('from_date');
+            $table->date('to_date');
+            $table->foreign('emp_id')->references('id')->on('employees');
+            $table->foreign('dept_id')->references('id')->on('departments');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +32,6 @@ class CreateTableDeptEmp extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('dept_manager');
     }
 }

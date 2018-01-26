@@ -13,7 +13,15 @@ class CreateTableTitles extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('titles', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('emp_id')->unsigned();
+            $table->string('title', 70);
+            $table->date('from_date');
+            $table->date('to_date');
+            $table->foreign('emp_id')->references('id')->on('employees');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +31,6 @@ class CreateTableTitles extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('titles');
     }
 }
