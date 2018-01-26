@@ -6,8 +6,8 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                	Dashboard > Funcionarios
-                	<a class="btn btn-info pull-right" href="{{ url('dashboard/employees/create') }}">Novo</a>
+                	Dashboard > Funcionarios<br>
+                	<a class="btn btn-info" href="{{ url('dashboard/employees/create') }}">Novo <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
                 </div>
 
                 <div class="panel-body">

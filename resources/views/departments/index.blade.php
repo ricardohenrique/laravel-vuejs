@@ -6,8 +6,8 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                	Dashboard > Departamentos
-                	<a class="btn btn-info pull-right" href="{{ url('dashboard/departments/create') }}">Novo</a>
+                	Dashboard > Departamentos<br>
+                	<a class="btn btn-info" href="{{ url('dashboard/departments/create') }}">Novo <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
                 </div>
 
                 <div class="panel-body">

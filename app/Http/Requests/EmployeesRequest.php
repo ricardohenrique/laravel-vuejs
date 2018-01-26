@@ -57,7 +57,7 @@ class EmployeesRequest extends FormRequest
             'hire_date.required'  => 'Data de contratação é obrigatório',
             'hire_date.date'      => 'Data de contratação deve ser uma data válida',
 
-            'department.required' => 'Departamento é obrigatório',
+            'department.required' => 'Escolha pelo menos um departamento',
 
             'title.required'  => 'Título é obrigatório',
             'title.max'       => 'Tamanho máximo excedido(20)',
