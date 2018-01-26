@@ -28,7 +28,7 @@ class EmployeesController extends Controller
     {
         $employees = Employees::all();
         $data['employees'] = Employees::all();
-        
+
         return view('employees/index', $data);
     }
 
@@ -39,7 +39,6 @@ class EmployeesController extends Controller
      */
     public function create()
     {
-
         return view('employees/create');
     }
 
@@ -59,6 +58,52 @@ class EmployeesController extends Controller
         $employe->save();
 
         $messageReturn = "Funcionario '".$employe->first_name."' salvo com sucesso";
+        return redirect('dashboard/employees')->with('status', $messageReturn);;
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Request $request, $id)
+    {
+        $employe = Employees::find($id);
+        $data['employe'] = $employe;
+
+        return view('employees/edit', $data);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(StoreEmployeesRequest $request, $id)
+    {
+        $employe = Employees::find($id);
+        $employe->first_name = $request->first_name;
+        $employe->last_name = $request->last_name;
+        $employe->gender = $request->gender;
+        $employe->hire_date = $request->hire_date;
+        $employe->birth_date = $request->birth_date;
+        $employe->save();
+
+        $messageReturn = "Funcionario '".$employe->first_name."' alterado com sucesso";
+        return redirect('dashboard/employees')->with('status', $messageReturn);;
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, $id)
+    {
+        $employe = Employees::find($id);
+        $employe->delete();
+
+        $messageReturn = "Funcionario '".$employe->first_name."' deletado com sucesso";
         return redirect('dashboard/employees')->with('status', $messageReturn);;
     }
 }

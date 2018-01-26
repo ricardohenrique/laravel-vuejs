@@ -27,18 +27,27 @@
 								<th>Último nome</th>
 								<th>Data de contratação</th> 
 								<th>Data de nascimento</th> 
-								<th>Sexo</th> 
+								<th>Sexo</th>
+								<th>Ações</th>
 							</tr> 
 						</thead> 
 						<tbody> 
-							@foreach($employees as $emploey)
+							@foreach($employees as $employe)
 								<tr>
-									<th>{{$emploey->id}}</th> 
-									<td>{{$emploey->first_name}}</td> 
-									<td>{{$emploey->last_name}}</td> 
-									<td>{{$emploey->hire_date}}</td> 
-									<td>{{$emploey->birth_date}}</td> 
-									<td>{{$emploey->gender}}</td> 
+									<th>{{$employe->id}}</th> 
+									<td>{{$employe->first_name}}</td> 
+									<td>{{$employe->last_name}}</td> 
+									<td>{{$employe->hire_date}}</td> 
+									<td>{{$employe->birth_date}}</td> 
+									<td>{{$employe->gender}}</td> 
+									<td>
+										<a class="btn btn-info btn-xs" href='{{url("dashboard/employees/$employe->id/edit")}}'>Editar</a>
+										<form class="form-horizontal" method="POST" action='{{ url("dashboard/employees/$employe->id") }}' >
+				                        	{{ csrf_field() }}
+				                        	<input type="hidden" name="_method" value="DELETE">
+				                        	<button class="btn btn-danger btn-xs" href='{{url("dashboard/employees/$employe->id/edit")}}'>Excluir</button>
+				                        </form>
+									</td>
 								</tr> 
 							@endforeach
 						</tbody> 
